@@ -13,7 +13,7 @@ class MobileMoney {
         return await this.makeTransaction("receive", paymentInfomation);
     }
 
-    makeTransaction(type, paymentInfomation) {
+    async makeTransaction(type, paymentInfomation) {
         let transactionType;
 
         switch (type) {
@@ -24,26 +24,41 @@ class MobileMoney {
                 transactionType = "receive";
                 break;
             default:
-                throw new Error("Unknown operation received.");
+                throw new Error("Unknown operation: makeTransaction().");
                 break;
         }
 
-        const url = `${this.config.apiBaseURL}/merchants/${this.config
-            .merchantAccountNumber}/${transactionType}/mobilemoney`;
+        if (!this.config) throw new Error("No configuration received");
 
-        const token = util.base64Encode(
-            this.config.clientId + ":" + this.config.clientSecret
-        );
+        const {
+            apiBaseURL,
+            merchantAccountNumber,
+            clientId,
+            clientSecret
+        } = this.config;
 
-        let requestHeader = {
+        //validate config
+        if (!apiBaseURL) throw new Error("No API base URL is set");
+
+        if (!merchantAccountNumber)
+            throw new Error("No merchant account number is set");
+
+        if (!clientId) throw new Error("No client Id is set");
+
+        if (!clientSecret) throw new Error("No client secret is set");
+
+        const url = `${apiBaseURL}/merchants/${merchantAccountNumber}/${transactionType}/mobilemoney`;
+        const token = util.base64Encode(clientId + ":" + clientSecret);
+
+        let headers = {
             Authorization: `Basic ${token}`,
             "Content-Type": "application/json",
             Accept: "application/json"
         };
 
-        return util.fetchJSON(url, {
+        return await util.fetchJSON(url, {
             method: "POST",
-            headers: requestHeader,
+            headers,
             body: JSON.stringify(paymentInfomation)
         });
     }
