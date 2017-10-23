@@ -1,6 +1,6 @@
 {
     "name": "hubtel-mx",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Hubtel API for Node.js",
     "main": "index.js",
     "scripts": {
