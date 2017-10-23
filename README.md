@@ -4,79 +4,48 @@
 This is an unofficial [Hubtel API](https://hubtel.com) for Node.js.
 
 # Installation
-Using Dub, you may add `hubtel` as dependency in your `dub.json` file and the package will be downloaded automatically during project build if it's not downloaded already.
+Using Node.js v8.X or lastest, you install using:
 
 ```sh
-npm install hubtel
+npm install hubtel-mx
 ```
 
 # API configuration
 
-The `Config` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel Merhcant API Documentation](https://developers.hubtel.com/documentations/merchant-account-api) for more infomation.
+The `MobileMoneyConfig` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel Merhcant API Documentation](https://developers.hubtel.com/documentations/merchant-account-api) for more infomation.
 
 > From a security standpoint, it much safer to store your merhcant account API keys and other confidential information in environment variables instead of hard-coding them in your source code.
 
-```d
-const {Config, MobileMoney} = require("hubtel");
+```js
+const { MobileMoney, MobileMoneyConfig } = require("hubtel-mx");
 
-const userSendData = 
-    {
-        "RecipientName": "John Doe",
-        "RecipientMsisdn": "233264545335",
-        "CustomerEmail": "johndoe@gmail.com",
-        "Channel": "airtel-gh",
-        "Amount": 4.00,
-        "PrimaryCallbackUrl": "https://payment.johndoe.com/payment-send-callback" ,
-        "SecondaryCallbackUrl": "",
-        "Description": "Ordered 2 packages of waakye",
-        "ClientReference": "10652132"
-    };
+const priv = {
+    clientId: "HMXXXXXXXXX
+    clientSecret: "XXXXXXXXXXXXXXXX",
+    merchantAccountNumber: "XXXXXXXXXX"
+};
 
-const userReceiveData =
-    {
-        "CustomerName": "Mary Doe",
-        "CustomerMsisdn": "233264545335",
-        "CustomerEmail": "marydoe@gmail.com",
-        "Channel": "airtel-gh",
-        "Amount": 7.50,
-        "PrimaryCallbackUrl": "https://payment.marydoe.com/payment-receive-callback",
-        "Description": "One bowl of Gari"
-    };
+const config = new MobileMoneyConfig({
+    clientId: priv.clientId,
+    clientSecret: priv.clientSecret,
+    merchantAccountNumber: priv.accountNumber
+});
 
-    const config = new Config({
-            clientId;
-            clientSecret;
-            merchantAccountNumber;
-            apiBaseURL: "" // Optinal, will use https://api.hubtel.com/v1/ by default
-            merchantaccount";
-        })
+const mobileMoney = new MobileMoney(config);
 
-        "YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", "YOUR_MERHCHANT_ACCOUNT_NUMBER");
-    MobileMoney pay = MobileMoney(config);
-
-    // Sending payment
-    auto sendResult = pay.send(userSendData);
-    if (sendResult.error)
-    {
-        //Take appropriate action here
-        string errorMessage = sendResult.response;
-    }
-
-    //Connection went through. Use response to determine what happended
-    writeln(sendResult.response);
-
-
-    // Recieving payment
-    auto receiveResult = pay.receive(userReceiveData);
-     if (receiveResult.error)
-    {
-        //Take appropriate action here
-        string errorMessage = receiveResult.response;
-    }
-
-    //Connection went through. Use response to determine what happended
-    writeln(receiveResult.response);
-}
+mobileMoney
+    .receive({
+        CustomerName: "Mary Doe",
+        CustomerMsisdn: "0542348455",
+        CustomerEmail: "karabutaworld@gmail.com",
+        Channel: "mtn-gh",
+        Amount: 0.05,
+        PrimaryCallbackUrl: "https://example.com/payment_callback",
+        Description: "Bowl of Gari",
+        ClientReference: "UniqueXXXXX21XX"
+    })
+    .then(resJSON => console.log(resJSON))
+    .catch(err => console.log(err));   
 ```
 
 # Todo
@@ -84,5 +53,5 @@ const userReceiveData =
 * Improve code test coverage
     - contract for `send()` and `receive()`
     - API call response
-    - `Config()`
+    - `MobileMoneyConfig()`
 * Improve API documentation
