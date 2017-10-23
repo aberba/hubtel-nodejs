@@ -20,7 +20,7 @@ The `MobileMoneyConfig` class is used for API configuration. Substitute informat
 const { MobileMoney, MobileMoneyConfig } = require("hubtel-mx");
 
 const priv = {
-    clientId: "HMXXXXXXXXX,
+    clientId: "HMXXXXXXXXX",
     clientSecret: "XXXXXXXXXXXXXXXX",
     merchantAccountNumber: "XXXXXXXXXX"
 };
