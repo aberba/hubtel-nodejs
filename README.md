@@ -36,13 +36,28 @@ const mobileMoney = new MobileMoney(config);
 mobileMoney
     .receive({
         CustomerName: "Mary Doe",
-        CustomerMsisdn: "0542348455",
+        CustomerMsisdn: "05XXXXXXXX",
         CustomerEmail: "karabutaworld@gmail.com",
         Channel: "mtn-gh",
         Amount: 0.05,
         PrimaryCallbackUrl: "https://example.com/payment_callback",
         Description: "Bowl of Gari",
         ClientReference: "UniqueXXXXX21XX"
+    })
+    .then(resJSON => console.log(resJSON))
+    .catch(err => console.log(err));   
+
+mobileMoney
+    .send({
+        "RecipientName": "Adongo Samuel",
+        "RecipientMsisdn": "23327XXXXXXX",
+        "CustomerEmail": "karabutaworld@gmail.com",
+        "Channel": "tigo-gh",
+        "Amount": 50.5,
+        "PrimaryCallbackUrl": "https://example.com/payment_callback",
+        "SecondaryCallbackUrl": "",
+        "Description": "Monthly Rent payment",
+        "ClientReference": "UniqueXXXXX21XX"
     })
     .then(resJSON => console.log(resJSON))
     .catch(err => console.log(err));   
