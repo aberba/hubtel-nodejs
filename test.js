@@ -1,17 +1,9 @@
 const { MobileMoney, MobileMoneyConfig } = require(".");
 
-//const priv = require("./private");
-
-const priv = {
-    clientId: "HMXXXXXXXXX
-    clientSecret: "XXXXXXXXXXXXXXXX",
-    merchantAccountNumber: "XXXXXXXXXX"
-};
-
 const config = new MobileMoneyConfig({
-    clientId: priv.clientId,
-    clientSecret: priv.clientSecret,
-    merchantAccountNumber: priv.accountNumber
+    clientId: "HMXXXXXXXXX",
+    clientSecret: "XXXXXXXXXXXXXXXX",
+    merchantAccountNumber: "XXXXXXXXXXXXXXXX",
 });
 
 const mobileMoney = new MobileMoney(config);
