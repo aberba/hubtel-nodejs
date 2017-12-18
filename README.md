@@ -8,10 +8,10 @@ Using Node.js v8.X or lastest, you install using:
 npm install hubtel-mx
 ```
 
+> From a security standpoint, it much safer to store all account API keys and other confidentials in environment variables instead of hard-coding them in your source code.
+
 ## Mobile Money API
 The `MobileMoneyConfig` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel Merhcant API Documentation](https://developers.hubtel.com/documentations/merchant-account-api) for more infomation.
-
-> From a security standpoint, it much safer to store your merhcant account API keys and other confidential information in environment variables instead of hard-coding them in your source code.
 
 ```js
 const {
@@ -20,16 +20,17 @@ const {
     getErrorMessageFromResponseCode
 } = require("hubtel-mx");
 
-const priv = {
+// Use your own account confedentials
+const secret = {
     clientId: "XXXXXXXXX",
     clientSecret: "XXXXXXXXXXXXXXXX",
     merchantAccountNumber: "HMXXXXXXXXX"
 };
 
 const config = new MobileMoneyConfig({
-    clientId: priv.clientId,
-    clientSecret: priv.clientSecret,
-    merchantAccountNumber: priv.merchantAccountNumber
+    clientId: secret.clientId,
+    clientSecret: secret.clientSecret,
+    merchantAccountNumber: secret.merchantAccountNumber
 });
 
 const mobileMoney = new MobileMoney(config);
@@ -92,13 +93,90 @@ const payUsualBills = async ClientReference => {
 console.log(payUsualBills("UniqueXXXXX21XX"));
 ```
 
-## Note
+### Note (Mobile Money API)
 The `String getErrorMessageFromResponseCode(String code)` function returns an error message using the API response code passed as an argument. Some of these messages are modified versions of what is available in the documentation... such that it is much clearer (in my judgement) when displayed to a customer than those provided by the API response (`responseJSON.Data.Description`). Use `responseJSON.Data.Description` to be on par with Hubtel.
 
+
+## SMS Messaging API
+The `SMSMessageConfig` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel SMS API Documentation](https://developers.hubtel.com/documentations/sendmessage) for more infomation.
+
+```js
+const { SMSMessage, SMSMessageConfig } = require("hubtel-mx");
+
+const secret = {
+    clientId: "XXXXXXXXX",
+    clientSecret: "XXXXXXXXXXXXXXXX",
+    merchantAccountNumber: "HMXXXXXXXXX"
+};
+
+const config = new SMSMessageConfig({
+    clientId: secret.clientId,
+    clientSecret: secret.clientSecret
+});
+
+const message = new SMSMessage(config);
+
+message
+    .sendOne({
+        From: "smsgh",
+        To: "+233248183797",
+        Content: "hello, world!",
+        RegisteredDelivery: "true",
+        Time: "2014-01-01 10:00:00"
+    })
+    .then(responseJSON => {
+        console.log(responseJSON);
+    })
+    .catch(err => console.log(err));
+
+// Using ES6 async and await
+(async () => {
+    try {
+        // using GET request
+        const response = await message.get({
+            From: "smsgh",
+            To: "+233248183797",
+            Content: "hello, world!",
+            RegisteredDelivery: "true",
+            Time: "2014-01-01 10:00:00"
+        });
+
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+    }
+})();
+```
+
+### Note (SMS Messaging API)
+Other functions are available for sending SMS messaging. See the SMS messaging documentation for other parameters they accept.  List include:
+
+* `sendOne(messageInfomation) {}`: Sends a single message
+* `schedule(messageInfomation) {}`: Schedule message to be sent later at time provided as `Time` argument.
+
+> The URL used in API configuration can be overidden by setting `apiBaseURL` parameter of `SMSMessageConfig()` class during instantiation.
+
+> ```js
+> const config = new SMSMessageConfig({
+>       apiBaseURL: "https://api.hubtel.com/v1/messages/{MESSAGE_ID}",
+>       clientId: secret.clientId,
+>       clientSecret: secret.clientSecret
+> });
+```
+
+* `reschedule(messageInfomation) {}`: Reschedule messages to be sent later at time provided as `Time` argument. Configuration URL must be in the format `https://api.hubtel.com/v1/messages/{messageId}` .
+* `cancelSchedule() {}`: Cancels a scheduled message that has not already been sent using the message ID provided as argument to the configuration  Configuration URL must be in the format `https://api.smsgh.com/v3/messages/{messageId}` .
+* `get(messageInfomation) {}`: Send message using GET request. Parameters are transformed to encoded URL query parameters.
+* ` query() {}`:  Query messages that have been sent or received on your account.
+
+
 ## Todo
-* SMS API
 * Create schema for send and receive payment data with in-built validation
 * Improve code test coverage
     - `send()` and `receive()`
     - API call responses
 * Improve API documentation
+
+
+## Hacking
+You are welcomed to submit pull request on the code and documentation or make suggestions on the APIs.

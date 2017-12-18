@@ -118,4 +118,9 @@ util.getErrorMessageFromResponseCode = mobileMoneyErrorCode => {
     return foundItem ? foundItem.message : null;
 };
 
+util.objectToQueryString = obj => {
+    return Object.keys(obj)
+        .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`)
+        .join("&");
+};
 module.exports = util;

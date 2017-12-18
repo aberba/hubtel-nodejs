@@ -8,4 +8,12 @@ class MobileMoneyConfig {
     }
 }
 
-module.exports = { MobileMoneyConfig };
+class SMSMessageConfig {
+    constructor({ clientId, clientSecret, apiBaseURL }) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        this.apiBaseURL = apiBaseURL || "https://api.hubtel.com/v1/messages";
+    }
+}
+
+module.exports = { MobileMoneyConfig, SMSMessageConfig };

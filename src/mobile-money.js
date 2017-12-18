@@ -5,15 +5,15 @@ class MobileMoney {
         this.config = config;
     }
 
-    async send(paymentInfomation) {
-        return await this.makeTransaction("send", paymentInfomation);
+    async send(paymentInformation) {
+        return await this.makeTransaction("send", paymentInformation);
     }
 
-    async receive(paymentInfomation) {
-        return await this.makeTransaction("receive", paymentInfomation);
+    async receive(paymentInformation) {
+        return await this.makeTransaction("receive", paymentInformation);
     }
 
-    async makeTransaction(type, paymentInfomation) {
+    async makeTransaction(type, paymentInformation) {
         let transactionType;
 
         switch (type) {
@@ -59,7 +59,7 @@ class MobileMoney {
         return await util.fetchJSON(url, {
             method: "POST",
             headers,
-            body: JSON.stringify(paymentInfomation)
+            body: JSON.stringify(paymentInformation)
         });
     }
 }

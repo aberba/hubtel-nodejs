@@ -2,7 +2,7 @@ const {
     MobileMoney,
     MobileMoneyConfig,
     getErrorMessageFromResponseCode
-} = require(".");
+} = require("..");
 
 const priv = {
     clientId: "XXXXXXXXX",
