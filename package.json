@@ -1,12 +1,14 @@
 {
     "name": "hubtel-mx",
-    "version": "0.0.8",
+    "version": "0.1.0",
     "description": "Hubtel API for Node.js",
     "main": "index.js",
     "scripts": {
         "test": "node test.js"
     },
-    "keywords": ["hubtel"],
+    "keywords": [
+        "hubtel"
+    ],
     "author": "Lawrence Aberba",
     "license": "BSL-1.0",
     "dependencies": {
