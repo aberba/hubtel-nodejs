@@ -14,7 +14,7 @@ util.fetchJSON = (hostURL, options) => {
 };
 
 util.base64Encode = text => {
-    return new Buffer(text).toString("base64");
+    return Buffer.from(text).toString("base64");
 };
 
 // phoneNumber.length prevents JS regex delay attacks
