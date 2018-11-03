@@ -1,4 +1,4 @@
-const { SMSMessage, SMSMessageConfig } = require("..");
+const { SMSMessage, Config } = require("..");
 
 const secret = {
     clientId: "XXXXXXXXX",
@@ -6,7 +6,7 @@ const secret = {
     merchantAccountNumber: "HMXXXXXXXXX"
 };
 
-const config = new SMSMessageConfig({
+const config = new Config({
     clientId: secret.clientId,
     clientSecret: secret.clientSecret
 });

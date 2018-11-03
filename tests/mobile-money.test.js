@@ -1,6 +1,6 @@
 const {
     MobileMoney,
-    MobileMoneyConfig,
+    Config,
     getErrorMessageFromResponseCode
 } = require("..");
 
@@ -10,7 +10,7 @@ const priv = {
     merchantAccountNumber: "HMXXXXXXXXX"
 };
 
-const config = new MobileMoneyConfig({
+const config = new Config({
     clientId: priv.clientId,
     clientSecret: priv.clientSecret,
     merchantAccountNumber: priv.merchantAccountNumber
