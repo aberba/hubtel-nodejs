@@ -11,12 +11,12 @@ npm install hubtel-mx
 > From a security standpoint, it much safer to store all account API keys and other confidentials in environment variables instead of hard-coding them in your source code.
 
 ## Mobile Money API
-The `MobileMoneyConfig` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel Merhcant API Documentation](https://developers.hubtel.com/documentations/merchant-account-api) for more infomation.
+The `Config` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel Merhcant API Documentation](https://developers.hubtel.com/documentations/merchant-account-api) for more infomation.
 
 ```js
 const {
     MobileMoney,
-    MobileMoneyConfig,
+    Config,
     getErrorMessageFromResponseCode
 } = require("hubtel-mx");
 
@@ -27,7 +27,7 @@ const secret = {
     merchantAccountNumber: "HMXXXXXXXXX"
 };
 
-const config = new MobileMoneyConfig({
+const config = new Config({
     clientId: secret.clientId,
     clientSecret: secret.clientSecret,
     merchantAccountNumber: secret.merchantAccountNumber
@@ -98,10 +98,10 @@ The `String getErrorMessageFromResponseCode(String code)` function returns an er
 
 
 ## SMS Messaging API
-The `SMSMessageConfig` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel SMS API Documentation](https://developers.hubtel.com/documentations/sendmessage) for more infomation.
+The `Config` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel SMS API Documentation](https://developers.hubtel.com/documentations/sendmessage) for more infomation.
 
 ```js
-const { SMSMessage, SMSMessageConfig } = require("hubtel-mx");
+const { SMSMessage, Config } = require("hubtel-mx");
 
 const secret = {
     clientId: "XXXXXXXXX",
@@ -109,7 +109,7 @@ const secret = {
     merchantAccountNumber: "HMXXXXXXXXX"
 };
 
-const config = new SMSMessageConfig({
+const config = new Config({
     clientId: secret.clientId,
     clientSecret: secret.clientSecret
 });
@@ -154,10 +154,10 @@ Other functions are available for sending SMS messaging. See the SMS messaging d
 * `sendOne(messageInfomation) {}`: Sends a single message
 * `schedule(messageInfomation) {}`: Schedule message to be sent later at time provided as `Time` argument.
 
-> The URL used in API configuration can be overidden by setting `apiBaseURL` parameter of `SMSMessageConfig()` class during instantiation.
+> The URL used in API configuration can be overidden by setting `apiBaseURL` parameter of `Config()` class during instantiation.
 
 > ```js
-> const config = new SMSMessageConfig({
+> const config = new Config({
 >       apiBaseURL: "https://api.hubtel.com/v1/messages/{MESSAGE_ID}",
 >       clientId: secret.clientId,
 >       clientSecret: secret.clientSecret
