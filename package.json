@@ -4,7 +4,8 @@
     "description": "Hubtel API for Node.js",
     "main": "index.js",
     "scripts": {
-        "test": "node test.js"
+        "test-momo": "node tests/mobile-money.test.js",
+        "test-sms": "node tests/sms.test.js"
     },
     "keywords": [
         "hubtel"
@@ -12,6 +13,6 @@
     "author": "Lawrence Aberba",
     "license": "BSL-1.0",
     "dependencies": {
-        "node-fetch": "^1.7.3"
+        "node-fetch": "^2.2.0"
     }
 }
