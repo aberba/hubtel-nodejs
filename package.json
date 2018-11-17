@@ -1,5 +1,5 @@
 {
-    "name": "hubtel-mx",
+    "name": "@aberba/hubtel",
     "version": "0.2.1",
     "description": "Hubtel API for Node.js",
     "main": "index.js",
