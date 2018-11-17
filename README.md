@@ -2,16 +2,19 @@
 This is an unofficial [Hubtel API](https://hubtel.com) for Node.js.
 
 ## Installation
-Using Node.js v8.X or lastest, you install using:
+Using Node.js v8.X or latest, you install using:
 
 ```sh
 npm install hubtel-mx
 ```
 
-> From a security standpoint, it much safer to store all account API keys and other confidentials in environment variables instead of hard-coding them in your source code.
+> WARNING: Hubtel's APIs have some quirks, rules and restrictions you need to be aware of. Before using this package, I recommend you read on their [API reference](https://developers.hubtel.com/v1.0/reference) related to the service you're planning to use. Believe me, you'll use to save yourself days of...whew...hmm...frustration. 
+
+> From a security standpoint, it much safer to store all account API keys and other credentials in environment variables instead of hard-coding them in your source code.
+
 
 ## Mobile Money API
-The `Config` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel Merhcant API Documentation](https://developers.hubtel.com/documentations/merchant-account-api) for more infomation.
+The `Config` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel Merhcant API Documentation](https://developers.hubtel.com/documentations/merchant-account-api) for more information.
 
 ```js
 const {
@@ -20,7 +23,7 @@ const {
     getErrorMessageFromResponseCode
 } = require("hubtel-mx");
 
-// Use your own account confedentials
+// Use your own account credentials
 const secret = {
     clientId: "XXXXXXXXX",
     clientSecret: "XXXXXXXXXXXXXXXX",
@@ -89,7 +92,7 @@ const payUsualBills = async ClientReference => {
     return await mobileMoney.send(Object.assign(paymentData, ClientReference)); // object destructuring in future
 };
 
-// may thow, wrap in try catch block to handle errors
+// may throw, wrap in try catch block to handle errors
 console.log(payUsualBills("UniqueXXXXX21XX"));
 ```
 
@@ -98,7 +101,7 @@ The `String getErrorMessageFromResponseCode(String code)` function returns an er
 
 
 ## SMS Messaging API
-The `Config` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel SMS API Documentation](https://developers.hubtel.com/documentations/sendmessage) for more infomation.
+The `Config` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel SMS API Documentation](https://developers.hubtel.com/documentations/sendmessage) for more information.
 
 ```js
 const { SMSMessage, Config } = require("hubtel-mx");
@@ -154,7 +157,7 @@ Other functions are available for sending SMS messaging. See the SMS messaging d
 * `sendOne(messageInfomation) {}`: Sends a single message
 * `schedule(messageInfomation) {}`: Schedule message to be sent later at time provided as `Time` argument.
 
-> The URL used in API configuration can be overidden by setting `apiBaseURL` parameter of `Config()` class during instantiation.
+> The URL used in API configuration can be overridden by setting `apiBaseURL` parameter of `Config()` class during instantiation.
 
 > ```js
 > const config = new Config({

@@ -31,7 +31,6 @@ class MobileMoney {
         if (!this.config) throw new Error("No configuration received");
 
         const {
-            apiBaseURL,
             merchantAccountNumber,
             clientId,
             clientSecret
@@ -47,7 +46,7 @@ class MobileMoney {
 
         if (!clientSecret) throw new Error("No client secret is set");
 
-        const url = `${apiBaseURL}/merchants/${merchantAccountNumber}/${transactionType}/mobilemoney`;
+        const url = `https://api.hubtel.com/v1/merchantaccount/merchants/${merchantAccountNumber}/${transactionType}/mobilemoney`;
         const token = util.base64Encode(clientId + ":" + clientSecret);
 
         let headers = {

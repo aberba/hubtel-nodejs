@@ -41,7 +41,7 @@ class SMSMessage {
 
         if (!clientSecret) throw new Error("No client secret is set");
 
-        let url = apiBaseURL;
+        let url = "https://api.hubtel.com/v1/messages";
 
         const token = util.base64Encode(clientId + ":" + clientSecret);
 

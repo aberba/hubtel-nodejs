@@ -13,8 +13,6 @@ class Config {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.merchantAccountNumber = merchantAccountNumber;
-        this.apiBaseURL =
-            apiBaseURL || "https://api.hubtel.com/v1/merchantaccount";
     }
 }
 
