@@ -8,7 +8,11 @@
         "test-sms": "node tests/sms.test.js"
     },
     "keywords": [
-        "hubtel"
+        "hubtel",
+        "sms",
+        "mobile money",
+        "momo",
+        "payments"
     ],
     "repository": {
         "type": "git",
