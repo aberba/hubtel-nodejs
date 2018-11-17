@@ -1,6 +1,6 @@
 {
     "name": "hubtel-mx",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Hubtel API for Node.js",
     "main": "index.js",
     "scripts": {
@@ -10,7 +10,14 @@
     "keywords": [
         "hubtel"
     ],
-    "author": "Lawrence Aberba",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/aberba/hubtel-nodejs.git"
+    },
+    "bugs": {
+        "url": "https://github.com/aberba/hubtel-nodejs/issues"
+    },
+    "author": "Lawrence Aberba <karabutaworld@gmail.com>",
     "license": "BSL-1.0",
     "dependencies": {
         "node-fetch": "^2.2.0"
