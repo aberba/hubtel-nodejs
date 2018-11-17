@@ -1,6 +1,6 @@
 {
     "name": "@aberba/hubtel",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Hubtel API for Node.js",
     "main": "index.js",
     "scripts": {
