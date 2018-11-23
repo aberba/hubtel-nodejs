@@ -5,7 +5,7 @@ This is an unofficial [Hubtel API](https://hubtel.com) for Node.js.
 Using Node.js v8.X or latest, you install using:
 
 ```sh
-npm install hubtel-mx
+npm install @aberba/hubtel
 ```
 
 > WARNING: Hubtel's APIs have some quirks, rules and restrictions you need to be aware of. Before using this package, I recommend you read on their [API reference](https://developers.hubtel.com/v1.0/reference) related to the service you're planning to use. Believe me, you'll use to save yourself days of...whew...hmm...frustration. 
@@ -21,7 +21,7 @@ const {
     MobileMoney,
     Config,
     getErrorMessageFromResponseCode
-} = require("hubtel-mx");
+} = require("@aberba/hubtel");
 
 // Use your own account credentials
 const secret = {
@@ -104,7 +104,7 @@ The `String getErrorMessageFromResponseCode(String code)` function returns an er
 The `Config` class is used for API configuration. Substitute information provided below with your own account information. Check the [Hubtel SMS API Documentation](https://developers.hubtel.com/documentations/sendmessage) for more information.
 
 ```js
-const { SMSMessage, Config } = require("hubtel-mx");
+const { SMSMessage, Config } = require("@aberba/hubtel");
 
 const secret = {
     clientId: "XXXXXXXXX",
